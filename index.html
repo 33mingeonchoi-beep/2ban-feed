@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>2반피드</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">2반피드 <span>2B</span></a>
+    <div class="top-actions">
+      <button id="refreshBtn" class="icon-btn" aria-label="새로고침">↻</button>
+      <button id="logoutBtn" class="text-btn hidden">로그아웃</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="authPanel" class="auth-card">
+      <div class="intro">
+        <div class="logo">2</div>
+        <h1>우리 반의 소식을 한곳에</h1>
+        <p>2반 친구들과 사진과 이야기를 나눠 보세요.</p>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="login">로그인</button>
+        <button class="tab" data-tab="signup">회원가입</button>
+      </div>
+      <form id="authForm">
+        <label>이메일<input id="email" type="email" autocomplete="email" required placeholder="name@example.com"></label>
+        <label>비밀번호<input id="password" type="password" minlength="6" autocomplete="current-password" required placeholder="6자 이상"></label>
+        <label id="nicknameLabel" class="hidden">닉네임<input id="nickname" maxlength="24" placeholder="친구들에게 보일 이름"></label>
+        <button class="primary full" type="submit" id="authSubmit">로그인</button>
+        <p id="authMessage" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="appPanel" class="hidden">
+      <div class="welcome-row">
+        <div><p class="eyebrow">WELCOME TO</p><h1>2반피드</h1><p id="welcomeText" class="muted"></p></div>
+        <div class="avatar" id="myAvatar">2</div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-view="feed">피드</button>
+        <button class="nav-btn" data-view="board">학급 게시판</button>
+        <button class="nav-btn" data-view="profile">내 프로필</button>
+      </nav>
+
+      <section id="feedView" class="view">
+        <div class="section-heading"><div><h2>오늘의 피드</h2><p>우리 반의 순간을 공유해요.</p></div></div>
+        <form id="postForm" class="panel">
+          <h3>새 게시물</h3>
+          <textarea id="caption" maxlength="500" placeholder="무슨 일이 있었나요?"></textarea>
+          <div class="upload-row">
+            <label class="file-label">사진 선택<input id="postImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+            <button class="primary" type="submit">게시하기</button>
+          </div>
+          <p class="hint">이미지는 최대 8MB까지 업로드할 수 있어요.</p>
+          <p id="postMessage" class="message"></p>
+        </form>
+        <div class="stories panel">
+          <div><h3>24시간 스토리</h3><p class="hint">스토리는 24시간 후 자동으로 목록에서 사라져요.</p></div>
+          <form id="storyForm" class="story-form">
+            <input id="storyImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif" required>
+            <button class="secondary" type="submit">스토리 올리기</button>
+          </form>
+          <div id="storiesList" class="story-list"></div>
+        </div>
+        <div id="postsList" class="posts-list"></div>
+      </section>
+
+      <section id="boardView" class="view hidden">
+        <div class="section-heading"><div><h2>학급 게시판</h2><p>수행평가, 시험, 급식, 공지를 공유해요.</p></div></div>
+        <form id="boardForm" class="panel">
+          <h3>게시판 글쓰기</h3>
+          <label>분류<select id="boardCategory"><option value="공지">공지</option><option value="수행평가">수행평가</option><option value="시험">시험</option><option value="급식">급식</option><option value="자유">자유</option></select></label>
+          <label>제목<input id="boardTitle" maxlength="100" required placeholder="제목"></label>
+          <label>내용<textarea id="boardContent" maxlength="3000" required placeholder="내용을 입력해 주세요."></textarea></label>
+          <label>날짜(선택)<input id="boardDate" type="date"></label>
+          <button class="primary" type="submit">등록하기</button>
+          <p id="boardMessage" class="message"></p>
+        </form>
+        <div id="boardList" class="board-list"></div>
+      </section>
+
+      <section id="profileView" class="view hidden">
+        <div class="section-heading"><div><h2>내 프로필</h2><p>친구들에게 보여질 이름을 설정해요.</p></div></div>
+        <form id="profileForm" class="panel">
+          <label>닉네임<input id="profileNickname" maxlength="24" required></label>
+          <button class="primary" type="submit">프로필 저장</button>
+          <p id="profileMessage" class="message"></p>
+        </form>
+      </section>
+    </section>
+    <footer>2반피드 · 우리 반의 작은 소통 공간</footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
