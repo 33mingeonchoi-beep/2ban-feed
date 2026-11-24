@@ -1,7 +1,7 @@
 // 2반피드 - Supabase 연결 설정
 // 아래 두 값은 Supabase Project Settings > API Keys에서 확인한 값으로 채워 주세요.
-const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+const SUPABASE_URL = "https://fiagrhzcvxpqwguyneck.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = sb_publishable_8iVmLY91WEQ8bhQD3PyJIA_4sutyeYw Publishable_key";
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const BUCKET = "2ban-images";
